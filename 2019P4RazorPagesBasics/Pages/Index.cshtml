@@ -1,0 +1,20 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model P4RazorPagesBasics.Pages.IndexModel
+@{
+    ViewData["Title"] = "Calc HomePage";
+}
+
+<h1>Kalkulátor v0.0.1</h1>
+
+<form method="get">
+    <label asp-for="Data.A"></label>
+    <input asp-for="Data.A" />
+
+    <label asp-for="Data.Op"></label>
+    <select asp-for="Data.Op" asp-items="Html.GetEnumSelectList<RazorPagesBasics.ViewModels.Operation>()"></select>
+
+    <label asp-for="Data.B"></label>
+    <input asp-for="Data.B" />
+</form>
+
