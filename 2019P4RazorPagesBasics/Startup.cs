@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace _2019P4RazorPagesBasics
+namespace RazorPagesBasics
 {
     public class Startup
     {

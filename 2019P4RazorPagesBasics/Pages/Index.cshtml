@@ -1,6 +1,5 @@
 ﻿@page
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model P4RazorPagesBasics.Pages.IndexModel
+@model Pages.IndexModel
 @{
     ViewData["Title"] = "Calc HomePage";
 }
@@ -12,9 +11,18 @@
     <input asp-for="Data.A" />
 
     <label asp-for="Data.Op"></label>
-    <select asp-for="Data.Op" asp-items="Html.GetEnumSelectList<RazorPagesBasics.ViewModels.Operation>()"></select>
+    <select asp-for="Data.Op" asp-items="Html.GetEnumSelectList<Operation>()"></select>
 
     <label asp-for="Data.B"></label>
     <input asp-for="Data.B" />
+
+    <input type="submit" value="Počítej!" />
 </form>
 
+<div>
+    <ul>
+        <li><a asp-page="./Index" asp-page-handler="Forced" asp-route-a="666" asp-route-b="333">a=666 b=333</a></li>
+        <li><a asp-page-handler="Forced" asp-route-a="999" asp-route-b="333">a=999 b=333</a></li>
+        <li><a asp-page-handler="Forced" asp-route-a="111" asp-route-b="333">a=111 b=333</a></li>
+    </ul>
+</div>

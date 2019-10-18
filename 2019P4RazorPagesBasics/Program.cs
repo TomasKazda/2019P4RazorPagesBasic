@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace _2019P4RazorPagesBasics
+namespace RazorPagesBasics
 {
     public class Program
     {

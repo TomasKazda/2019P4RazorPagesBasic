@@ -7,8 +7,9 @@ using System.ComponentModel.DataAnnotations;
 namespace RazorPagesBasics.ViewModels
 {
     public enum Operation
-    {
-        součet = 1,
+    {   
+        [Display(Name = "součet")]
+        sum = 1,
         rozdíl,
         součin,
         podíl

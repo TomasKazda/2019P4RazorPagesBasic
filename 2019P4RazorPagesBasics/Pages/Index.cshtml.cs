@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPagesBasics.ViewModels;
 
-namespace P4RazorPagesBasics.Pages
+namespace RazorPagesBasics.Pages
 {
     public class IndexModel : PageModel
     {
@@ -15,7 +15,17 @@ namespace P4RazorPagesBasics.Pages
 
         public void OnGet()
         {
+            //Data = new CalcData() { A = 12, B = 33 };
+        }
 
+        public void OnGetOther()
+        {
+            Data = new CalcData() { A = 44, B = 66 };
+        }
+
+        public void OnGetForced(int a, int b)
+        {
+            Data = new CalcData() { A = a, B = b };
         }
     }
 }
