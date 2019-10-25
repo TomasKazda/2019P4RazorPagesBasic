@@ -6,7 +6,7 @@
 
 <h1>Kalkulátor v0.0.1</h1>
 
-<form method="get">
+<form method="post">
     <label asp-for="Data.A"></label>
     <input asp-for="Data.A" />
 
@@ -15,14 +15,22 @@
 
     <label asp-for="Data.B"></label>
     <input asp-for="Data.B" />
-
+    <span asp-validation-for="Data.B"></span>
     <input type="submit" value="Počítej!" />
 </form>
 
 <div>
     <ul>
         <li><a asp-page="./Index" asp-page-handler="Forced" asp-route-a="666" asp-route-b="333">a=666 b=333</a></li>
-        <li><a asp-page-handler="Forced" asp-route-a="999" asp-route-b="333">a=999 b=333</a></li>
+        <li><a asp-route-a="999" asp-route-b="333">a=999 b=333</a></li>
         <li><a asp-page-handler="Forced" asp-route-a="111" asp-route-b="333">a=111 b=333</a></li>
     </ul>
+</div>
+
+<div>
+    @if (Model.Result?.Length > 0)
+    {
+        <h2>Výsledek</h2>
+        <p>@Model.Result</p>
+    }
 </div>

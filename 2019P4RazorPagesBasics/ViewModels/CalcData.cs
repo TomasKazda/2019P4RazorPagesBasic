@@ -20,7 +20,7 @@ namespace RazorPagesBasics.ViewModels
         public int A { get; set; }
 
         [Display(Name = "Druhé číslo")]
-        [Range(1, 100, ErrorMessage = "Zadej jen číslo od {0} do {1}")]
+        [Range(1, 100, ErrorMessage = "Zadej jen číslo od {1} do {2}")]
         public int B { get; set; }
 
         [Display(Name = "Operace")]
