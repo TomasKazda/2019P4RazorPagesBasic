@@ -27,5 +27,14 @@ namespace Logik.Pages
         {
             FromTo = new LogikInit() { From = from, To = to };
         }
+
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToPage("./Game", "Init", new { from = this.FromTo.To, to = this.FromTo.To });
+            }
+            return Page();
+        }
     }
 }
