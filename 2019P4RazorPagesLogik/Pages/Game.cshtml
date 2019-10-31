@@ -5,41 +5,47 @@
 }
 <h2>Game running...</h2>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="LogikData.Round"></label>
-        <input asp-for="LogikData.Round" value="@Model.LogikData.Round" class="form-control" readonly />
-        <span asp-validation-for="LogikData.Round" class="form-text text-danger"></span>
+@if (!Model.LogikData.EndGame)
+{
+    <form method="post">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label asp-for="LogikData.Round"></label>
+                    <input asp-for="LogikData.Round" value="@Model.LogikData.Round" class="form-control" readonly />
+                    <span asp-validation-for="LogikData.Round" class="form-text text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="LogikData.LastTry"></label>
+                    <input asp-for="LogikData.LastTry" class="form-control" />
+                    <span asp-validation-for="LogikData.LastTry" class="form-text text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2 align-self-center flex-grow-1">
+                <button type="submit" class="btn btn-primary w-100">Try!</button>
+            </div>
+        </div>
+        <div>
+            <input type="hidden" asp-for="LogikData.Secret" />
+        </div>
+    </form>
+} else {
+    <div class="jumbotron">
+        <p class="text-success">Secret @Model.LogikData.Secret was resolved on @Model.LogikData.RoundStr attempt.</p>
     </div>
-    <div class="form-group">
-        <label asp-for="LogikData.LastTry"></label>
-        <input asp-for="LogikData.LastTry" class="form-control" />
-        <span asp-validation-for="LogikData.LastTry" class="form-text text-danger"></span>
-    </div>
-    <div>
-        <input type="hidden" asp-for="LogikData.Secret" />
-    </div>
-    <button type="submit" class="btn btn-primary">Try!</button>
-</form>
+}
 
 @if (Model.LogikData.Round > 1)
 {
-<div class="jumbotron">
-    @{
-        string alerttype = "";
-        if (Model.LogikData.SecretToLastTry == 0) { alerttype += "success"; }
-        if (Model.LogikData.SecretToLastTry > 0) { alerttype += "primary"; }
-        if (Model.LogikData.SecretToLastTry < 0) { alerttype += "danger"; }
-    }
 
-    <p class="alert alert-@(alerttype)">
-        @Model.LogikData.GetMessage()
-    </p>
+        <p class="alert alert-@Model.LogikData.GetAlertClass() mt-2">
+            @Model.LogikData.GetMessage()
+        </p>
 
-    @if (Model.LogikData.SecretToLastTry == 0)
-    {
-        <p><a asp-page="Index" class="btn btn-info">New Game</a></p>
-    }
-
-</div>
+        @if (Model.LogikData.EndGame)
+        {
+            <p><a asp-page="Index" class="btn btn-info">New Game</a></p>
+        }
 }
