@@ -8,7 +8,7 @@ namespace Logik.Services
     public class LogicGame : ILogicGame
     {
         private static readonly Random rnd = new Random();
-        private int Secret { get; set; }
+        public int Secret { get; private set; }
         private int? LastTry { get; set; }
         public int Round { get; private set; }
 
