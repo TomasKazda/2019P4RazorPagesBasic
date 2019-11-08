@@ -52,6 +52,5 @@ namespace Logik.ViewModels
             if (SecretToLastTry < 0) { return "danger"; }
             return "success";
         }
-                
     }
 }

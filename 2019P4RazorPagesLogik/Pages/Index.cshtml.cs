@@ -32,7 +32,8 @@ namespace Logik.Pages
         {
             if (ModelState.IsValid)
             {
-                return RedirectToPage("./Game", "Init", new { from = this.FromTo.From, to = this.FromTo.To });
+                return RedirectToPage("./Game", "Init", 
+                    new { from = this.FromTo.From, to = this.FromTo.To });
             }
             return Page();
         }
