@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 
 namespace Logik.Services
 {
-    interface ILogicGame
+    public interface ILogicGame
     {
         void StartGame(int from, int to);
         int Round { get; }
-        bool IsVictory { get; }
+        string RoundStr { get; }
+        int? Secret { get; }
+        GameStatus GameStatus { get; }
         string GetMessage();
         int Try(int triedValue);
+        int SecretToLastTry { get; }
     }
 }

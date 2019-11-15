@@ -5,15 +5,14 @@
 }
 <h2>Game running...</h2>
 
-@if (!Model.LogikData.EndGame)
+@if (Model.IsRunning)
 {
     <form method="post">
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label asp-for="LogikData.Round"></label>
-                    <input asp-for="LogikData.Round" value="@Model.LogikData.Round" class="form-control" readonly />
-                    <span asp-validation-for="LogikData.Round" class="form-text text-danger"></span>
+                    <label>Round no.</label>
+                    <input value="@Model.Round" class="form-control" readonly />
                 </div>
             </div>
             <div class="col-sm-6">
@@ -27,25 +26,21 @@
                 <button type="submit" class="btn btn-primary w-100">Try!</button>
             </div>
         </div>
-        <div>
-            <input type="hidden" asp-for="LogikData.Secret" />
-        </div>
     </form>
-} else {
+}
+else
+{
     <div class="jumbotron">
-        <p class="text-success">Secret @Model.LogikData.Secret was resolved on @Model.LogikData.RoundStr attempt.</p>
+        <p class="text-success">Secret @Model.Secret was resolved on @Model.RoundStr attempt.</p>
     </div>
 }
 
-@if (Model.LogikData.Round > 1)
-{
 
-        <p class="alert alert-@Model.LogikData.GetAlertClass() mt-2">
-            @Model.LogikData.GetMessage()
-        </p>
 
-        @if (Model.LogikData.EndGame)
-        {
-            <p><a asp-page="Index" class="btn btn-info">New Game</a></p>
-        }
-}
+    <p class="alert alert-@Model.AlertClass mt-2">
+        @Model.Message
+    </p>
+
+
+    <p><a asp-page="Index" class="btn btn-info">New Game</a></p>
+

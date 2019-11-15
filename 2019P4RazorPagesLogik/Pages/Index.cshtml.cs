@@ -5,14 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Logik.ViewModels;
+using Logik.Services;
 
 namespace Logik.Pages
 {
     public class IndexModel : PageModel
     {
-        public IndexModel()
+        ILogicGame logic;
+        public IndexModel(ILogicGame logic)
         {
-
+            this.logic = logic;
         }
 
         [BindProperty]
@@ -32,8 +34,9 @@ namespace Logik.Pages
         {
             if (ModelState.IsValid)
             {
-                return RedirectToPage("./Game", "Init", 
-                    new { from = this.FromTo.From, to = this.FromTo.To });
+                logic.StartGame(FromTo.From, FromTo.To);
+
+                return RedirectToPage("./Game");
             }
             return Page();
         }

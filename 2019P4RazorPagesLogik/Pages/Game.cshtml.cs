@@ -5,31 +5,48 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Logik.ViewModels;
+using Logik.Services;
 
 namespace Logik.Pages
 {
     public class GameModel : PageModel
     {
         private static readonly Random rnd = new Random();
+        private readonly ILogicGame logic;
+
+        public GameModel(ILogicGame logic)
+        {
+            this.logic = logic;
+        }
 
         [BindProperty]
         public LogikS LogikData { get; set; }
 
-        public IActionResult OnGet()
+        //zobrazované vlastnosti
+        public string AlertClass
         {
-            return RedirectToPage("Index");
+            get
+            {
+                if (logic.SecretToLastTry > 0) { return "primary"; }
+                if (logic.SecretToLastTry < 0) { return "danger"; }
+                return "success";
+            }
         }
-
-        public void OnGetInit(int from, int to)
+        public bool IsRunning => logic.GameStatus == GameStatus.Running;
+        public int Round => logic.Round;
+        public int Secret => logic.Secret ?? -999;
+        public string RoundStr => logic.RoundStr;
+        public string Message => logic.GetMessage();
+        public void OnGet()
         {
-            LogikData = new LogikS() { LastTry = Math.Abs((from - to) / 2), Round = 1, Secret = rnd.Next(Math.Min(from, to), Math.Max(from, to) + 1) };
-        }
 
+        }
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
-                LogikData.Round++;
+                logic.Try(LogikData.LastTry);
+                RedirectToPage();
             }
             return Page();
         }

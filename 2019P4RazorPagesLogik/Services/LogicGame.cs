@@ -8,16 +8,16 @@ namespace Logik.Services
     public class LogicGame : ILogicGame
     {
         private static readonly Random rnd = new Random();
-        public int Secret { get; private set; }
+        public int? Secret { get; private set; }
         private int? LastTry { get; set; }
         public int Round { get; private set; }
 
-        public bool IsVictory => Secret == LastTry;
+        protected bool IsVictory => Secret == LastTry;
         public int SecretToLastTry
         {
             get
             {
-                return LastTry is null? 0 : Secret - (int)LastTry;
+                return LastTry is null? -1 : (int)Secret - (int)LastTry;
             }
         }
         public string GetMessage()
@@ -54,6 +54,14 @@ namespace Logik.Services
                         case 3: suff = "rd"; break;
                     }
                 return Round + suff;
+            }
+        }
+
+        public GameStatus GameStatus {
+            get {
+                if (Secret is null) return GameStatus.NotStarted;
+                if (IsVictory) return GameStatus.Victory;
+                return GameStatus.Running;
             }
         }
     }
