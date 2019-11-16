@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2019P4RazorPagesBasics", "2019P4RazorPagesBasics\2019P4RazorPagesBasics.csproj", "{EEC46856-FFA5-4828-AA08-8A9863E642F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2019P4RazorPagesLogik", "2019P4RazorPagesLogik\2019P4RazorPagesLogik.csproj", "{A205AA5B-DE7A-4483-A025-5AF889B84156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2019P4RazorPagesLogik", "2019P4RazorPagesLogik\2019P4RazorPagesLogik.csproj", "{A205AA5B-DE7A-4483-A025-5AF889B84156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2019P4RazorPagesLogikSession", "2019P4RazorPagesLogikSession\2019P4RazorPagesLogikSession.csproj", "{A789F763-715D-4E6A-B0AD-AB4C563A6496}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A205AA5B-DE7A-4483-A025-5AF889B84156}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A205AA5B-DE7A-4483-A025-5AF889B84156}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A205AA5B-DE7A-4483-A025-5AF889B84156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A789F763-715D-4E6A-B0AD-AB4C563A6496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A789F763-715D-4E6A-B0AD-AB4C563A6496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A789F763-715D-4E6A-B0AD-AB4C563A6496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A789F763-715D-4E6A-B0AD-AB4C563A6496}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

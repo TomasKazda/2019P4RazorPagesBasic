@@ -1,0 +1,51 @@
+﻿@page
+@model GameModel
+@{
+    ViewData["Title"] = "Game";
+}
+    <h2>Game @{if (!Model.IsRunning) {<span>not</span>} } running...</h2>
+
+@if (Model.IsRunning)
+{
+    <form method="post">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Round no.</label>
+                    <input value="@Model.Round" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="LogikData.LastTry"></label>
+                    <input asp-for="LogikData.LastTry" class="form-control" />
+                    <span asp-validation-for="LogikData.LastTry" class="form-text text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-2 align-self-center flex-grow-1">
+                <button type="submit" class="btn btn-primary w-100">Try!</button>
+            </div>
+        </div>
+    </form>
+}
+
+@if (Model.IsVictory)
+{
+    <div class="jumbotron">
+        <p class="text-success">Secret @Model.Secret was resolved on @Model.RoundStr attempt.</p>
+    </div>
+}
+
+@if (Model.Message != "")
+{ <soan>test</soan>
+    <p class="alert alert-@Model.AlertClass mt-2">
+        @Model.Message
+    </p>
+}
+
+@if (!Model.IsRunning)
+{
+    <p><a asp-page="Index" class="btn btn-info">New Game</a></p>
+}
+
+

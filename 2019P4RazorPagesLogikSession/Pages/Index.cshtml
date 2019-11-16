@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h2>game initialization</h2>
+    <form method="post">
+        <div class="row">
+            <div class="col-sm-5 form-group">
+                <label asp-for="FromTo.From"></label>
+                <input asp-for="FromTo.From" class="form-control" />
+                <span asp-validation-for="FromTo.From" class="form-text text-danger"></span>
+            </div>
+            <div class="col-sm-5 form-group">
+                <label asp-for="FromTo.To"></label>
+                <input asp-for="FromTo.To" class="form-control" />
+                <span asp-validation-for="FromTo.To" class="form-text text-danger"></span>
+            </div>
+            <div class="col-sm-2 align-self-center">
+                <button type="submit" class="btn btn-primary">Start the Game</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="list-group">
+                        <a asp-route-from="1" asp-route-to="10" asp-page-handler="range" class="list-group-item list-group-item-action">from 1 to 10</a>
+                        <a asp-route-from="1" asp-route-to="20" asp-page-handler="range" class="list-group-item list-group-item-action">from 1 to 20</a>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="list-group">
+                        <a asp-route-from="1" asp-route-to="50" asp-page-handler="range" class="list-group-item list-group-item-action">from 1 to 50</a>
+                        <a asp-route-from="1" asp-route-to="100" asp-page-handler="range" class="list-group-item list-group-item-action">from 1 to 100</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="list-group">
+                <a asp-route-from="1" asp-route-to="500" asp-page-handler="range" class="list-group-item list-group-item-action">from 1 to 500</a>
+                <a asp-route-from="1" asp-route-to="1000" asp-page-handler="range" class="list-group-item list-group-item-action">from 1 to 1000</a>
+            </div>
+        </div>
+    </div>
