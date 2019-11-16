@@ -33,10 +33,11 @@ namespace Logik.Pages
             }
         }
         public bool IsRunning => logic.GameStatus == GameStatus.Running;
+        public bool IsVictory => logic.GameStatus == GameStatus.Victory;
         public int Round => logic.Round;
         public int Secret => logic.Secret ?? -999;
         public string RoundStr => logic.RoundStr;
-        public string Message => logic.GetMessage();
+        public string Message { get; set; } = "";
         public void OnGet()
         {
 
@@ -46,6 +47,7 @@ namespace Logik.Pages
             if (ModelState.IsValid)
             {
                 logic.Try(LogikData.LastTry);
+                Message = logic.GetMessage();
                 RedirectToPage();
             }
             return Page();

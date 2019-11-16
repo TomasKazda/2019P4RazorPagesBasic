@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Game";
 }
-<h2>Game running...</h2>
+    <h2>Game @{if (!Model.IsRunning) {<span>not</span>} } running...</h2>
 
 @if (Model.IsRunning)
 {
@@ -28,19 +28,24 @@
         </div>
     </form>
 }
-else
+
+@if (Model.IsVictory)
 {
     <div class="jumbotron">
         <p class="text-success">Secret @Model.Secret was resolved on @Model.RoundStr attempt.</p>
     </div>
 }
 
-
-
+@if (Model.Message != "")
+{ <soan>test</soan>
     <p class="alert alert-@Model.AlertClass mt-2">
         @Model.Message
     </p>
+}
 
-
+@if (!Model.IsRunning)
+{
     <p><a asp-page="Index" class="btn btn-info">New Game</a></p>
+}
+
 
