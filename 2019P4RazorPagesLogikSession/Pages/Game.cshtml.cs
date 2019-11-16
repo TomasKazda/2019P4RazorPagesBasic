@@ -12,11 +12,13 @@ namespace Logik.Pages
     public class GameModel : PageModel
     {
         private static readonly Random rnd = new Random();
-        private readonly ILogicGame logic;
 
-        public GameModel(ILogicGame logic)
+        readonly ISessionController<LogicGame> logicgame;
+        readonly LogicGame logic;
+        public GameModel(ISessionController<LogicGame> logicgame)
         {
-            this.logic = logic;
+            this.logic = logicgame.LoadOrCreate(LogicGameKey.Key);
+            this.logicgame = logicgame;
         }
 
         [BindProperty]
@@ -48,6 +50,7 @@ namespace Logik.Pages
             {
                 logic.Try(LogikData.LastTry);
                 Message = logic.GetMessage();
+                logicgame.Save(LogicGameKey.Key, logic);
                 RedirectToPage();
             }
             return Page();

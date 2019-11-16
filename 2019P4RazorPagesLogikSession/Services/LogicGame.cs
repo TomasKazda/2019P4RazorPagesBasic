@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Utf8Json;
 
 namespace Logik.Services
 {
     public class LogicGame : ILogicGame
     {
         private static readonly Random rnd = new Random();
+        public LogicGame() { }
+
+        [SerializationConstructor]
+        protected LogicGame(int? secret = null, int? lastTry = null, int round = 0)
+        {
+            Secret = secret;
+            LastTry = lastTry;
+            Round = round;
+        }
+
         public int? Secret { get; private set; }
         private int? LastTry { get; set; }
         public int Round { get; private set; }
@@ -57,7 +68,6 @@ namespace Logik.Services
                 return Round + suff;
             }
         }
-
         public GameStatus GameStatus {
             get {
                 if (Secret is null) return GameStatus.NotStarted;

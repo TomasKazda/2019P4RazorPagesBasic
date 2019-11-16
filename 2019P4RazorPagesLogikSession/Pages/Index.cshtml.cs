@@ -11,10 +11,12 @@ namespace Logik.Pages
 {
     public class IndexModel : PageModel
     {
-        ILogicGame logic;
-        public IndexModel(ILogicGame logic)
+        readonly ISessionController<LogicGame> logicgame;
+        readonly LogicGame logic;
+        public IndexModel(ISessionController<LogicGame> logicgame)
         {
-            this.logic = logic;
+            this.logic = logicgame.LoadOrCreate(LogicGameKey.Key);
+            this.logicgame = logicgame;
         }
 
         [BindProperty]
@@ -35,7 +37,7 @@ namespace Logik.Pages
             if (ModelState.IsValid)
             {
                 logic.StartGame(FromTo.From, FromTo.To);
-
+                logicgame.Save(LogicGameKey.Key, logic);
                 return RedirectToPage("./Game");
             }
             return Page();
