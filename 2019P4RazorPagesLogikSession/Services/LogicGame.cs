@@ -1,29 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Utf8Json;
+using System.Runtime.Serialization;
 
 namespace Logik.Services
 {
     public class LogicGame : ILogicGame
     {
         private static readonly Random rnd = new Random();
-        public LogicGame() { }
+        //public LogicGame() { }
 
-        [SerializationConstructor]
-        protected LogicGame(int? secret = null, int? lastTry = null, int round = 0)
-        {
-            Secret = secret;
-            LastTry = lastTry;
-            Round = round;
-        }
+        //[SerializationConstructor]
+        //protected LogicGame(int? secret = null, int? lastTry = null, int round = 0)
+        //{
+        //    Secret = secret;
+        //    LastTry = lastTry;
+        //    Round = round;
+        //}
 
         public int? Secret { get; private set; }
         private int? LastTry { get; set; }
         public int Round { get; private set; }
 
+        [IgnoreDataMember]
         protected bool IsVictory => Secret == LastTry;
+
+        [IgnoreDataMember]
         public int SecretToLastTry
         {
             get
@@ -50,6 +50,8 @@ namespace Logik.Services
             LastTry = triedValue;
             return SecretToLastTry;
         }
+
+        [IgnoreDataMember]
         public string RoundStr
         {
             get
@@ -68,6 +70,8 @@ namespace Logik.Services
                 return Round + suff;
             }
         }
+
+        [IgnoreDataMember]
         public GameStatus GameStatus {
             get {
                 if (Secret is null) return GameStatus.NotStarted;
