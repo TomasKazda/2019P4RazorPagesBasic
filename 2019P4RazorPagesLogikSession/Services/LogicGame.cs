@@ -19,6 +19,8 @@ namespace Logik.Services
         public int? Secret { get; private set; }
         private int? LastTry { get; set; }
         public int Round { get; private set; }
+        public int Min { get; private set; }
+        public int Max { get; private set; }
 
         [IgnoreDataMember]
         protected bool IsVictory => Secret == LastTry;
@@ -42,10 +44,14 @@ namespace Logik.Services
         public void StartGame(int from, int to)
         {
             Round = 1;
-            Secret = rnd.Next(Math.Min(from, to), Math.Max(from, to) + 1);
+            Min = Math.Min(from, to);
+            Max = Math.Max(from, to);
+            Secret = rnd.Next(Min, Max + 1);
         }
         public int Try(int triedValue)
         {
+            if (triedValue >= Secret) Max = triedValue-1;
+            if (triedValue <= Secret) Min = triedValue+1;
             Round++;
             LastTry = triedValue;
             return SecretToLastTry;

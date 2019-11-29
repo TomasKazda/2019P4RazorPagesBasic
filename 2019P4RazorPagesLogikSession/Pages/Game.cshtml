@@ -18,7 +18,8 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label asp-for="LogikData.LastTry"></label>
-                    <input asp-for="LogikData.LastTry" class="form-control" />
+                    <select asp-for="LogikData.LastTry" asp-items="@Model.OptionsList" class="form-control">
+                    </select>
                     <span asp-validation-for="LogikData.LastTry" class="form-text text-danger"></span>
                 </div>
             </div>
@@ -36,10 +37,10 @@
     </div>
 }
 
-@if (Model.Message != "")
+@if (TempData["Message"] != null)
 {
     <p class="alert alert-@Model.AlertClass mt-2">
-        @Model.Message
+        @TempData.Peek("Message")
     </p>
 }
 

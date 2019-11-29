@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Logik.ViewModels;
 using Logik.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Logik.Pages
 {
@@ -19,6 +20,19 @@ namespace Logik.Pages
         {
             this.logic = logicgame.LoadOrCreate(LogicGameKey.Key);
             this.logicgame = logicgame;
+            refreshOptionsList();
+        }
+
+        private void refreshOptionsList()
+        {
+            OptionsList = new List<SelectListItem>();
+            for (int i = logic.Min; i <= logic.Max; i++)
+            {
+                if ((logic.Max - logic.Min) / 2 == i)
+                    OptionsList.Add(new SelectListItem(i.ToString(), i.ToString(), true));
+                else
+                    OptionsList.Add(new SelectListItem(i.ToString(), i.ToString()));
+            }
         }
 
         [BindProperty]
@@ -34,12 +48,15 @@ namespace Logik.Pages
                 return "success";
             }
         }
+        public List<SelectListItem> OptionsList { get; set; }
         public bool IsRunning => logic.GameStatus == GameStatus.Running;
         public bool IsVictory => logic.GameStatus == GameStatus.Victory;
         public int Round => logic.Round;
         public int Secret => logic.Secret ?? -999;
         public string RoundStr => logic.RoundStr;
-        public string Message { get; set; } = "";
+
+        [TempData]
+        public string Message { get; set; }
         public void OnGet()
         {
 
@@ -51,6 +68,7 @@ namespace Logik.Pages
                 logic.Try(LogikData.LastTry);
                 Message = logic.GetMessage();
                 logicgame.Save(LogicGameKey.Key, logic);
+                refreshOptionsList();
                 RedirectToPage();
             }
             return Page();
