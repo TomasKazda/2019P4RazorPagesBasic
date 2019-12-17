@@ -1,9 +1,10 @@
 ﻿using Logik.Helpers;
 using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Logik.Services
 {
-    public class SessionController<T> : ISessionController<T> where T: new()
+    public class SessionController<T> : ISessionController<T>/* where T: new()*/
     {
         readonly ISession _session;
         public SessionController(IHttpContextAccessor httpContextAccessor)
@@ -14,7 +15,7 @@ namespace Logik.Services
         public T LoadOrCreate(string key)
         {
             T result = _session.Get<T>(key);
-            if (result == null) result = new T();
+            if (typeof(T).IsClass && result == default) result = (T)Activator.CreateInstance(typeof(T));
             return result;
         }
 
