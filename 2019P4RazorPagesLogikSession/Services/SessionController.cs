@@ -15,7 +15,7 @@ namespace Logik.Services
         public T LoadOrCreate(string key)
         {
             T result = _session.Get<T>(key);
-            if (typeof(T).IsClass && result == default) result = (T)Activator.CreateInstance(typeof(T));
+            if (typeof(T).IsClass && result == null) result = (T)Activator.CreateInstance(typeof(T));
             return result;
         }
 
